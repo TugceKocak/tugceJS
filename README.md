@@ -11,6 +11,6 @@ Part2: [temperature conversion](https://tugcekocak.github.io/tugceJS/classwork_p
 ![Squirrel example](https://tugcekocak.github.io/tugceJS/images/sc555.png)
 
 ### Classwork4
-[courses](https://tugcekocak.github.io/tugceJS/cw4.html))
+[courses](https://tugcekocak.github.io/tugceJS/cw4.html)
 
 
