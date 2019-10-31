@@ -13,4 +13,6 @@ Part2: [temperature conversion](https://tugcekocak.github.io/tugceJS/classwork_p
 ### Classwork4
 [courses](https://tugcekocak.github.io/tugceJS/cw4.html)
 
+### Classwork5
+[Inspector](https://tugcekocak.github.io/tugceJS//CW5-CAL%C4%B0SMA/work/EloquentJS.html)
 
