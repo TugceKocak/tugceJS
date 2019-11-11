@@ -16,3 +16,5 @@ Part2: [temperature conversion](https://tugcekocak.github.io/tugceJS/classwork_p
 ### Classwork5
 [Inspector](https://tugcekocak.github.io/tugceJS//CW5-CAL%C4%B0SMA/work/EloquentJS.html)
 
+### Classwork6
+[File Operations](https://tugcekocak.github.io/tugceJS//CW6-File.html)
