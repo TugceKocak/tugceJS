@@ -18,3 +18,6 @@ Part2: [temperature conversion](https://tugcekocak.github.io/tugceJS/classwork_p
 
 ### Classwork6
 [File Operations](https://tugcekocak.github.io/tugceJS//CW6-File.html)
+
+### Classwork7
+[Array and Map Comparison](https://tugcekocak.github.io/tugceJS//CW7.html)
