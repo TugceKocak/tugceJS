@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)https://maeyler.github.io/305/work/Timing -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="https://maeyler.github.io/305/images/icon192.png">
+    <script src="Database.js"></script>
+
+
+  <style>
+    body { max-width: 450px; }
+
+  </style>
+</head>
+
+<body>
+<h2>Comparation with Array search and Map Search</h2>
+
+<h3></h3>
+<button onclick="timing(searchMap),timing(searchArray)">search</button>
+
+<p id="out">
+
+<hr>
+<h3>Sample code</h3>
+<pre id="sample">function searchMap(a, b) { //fast<br>    let s = new Set()<br>    for (let x of a)<br>      if (b.has(x)) s.add(x)<br>    return s<br>}<br>function searchArray() { //slow<br>    let s = new Set()<br>    for (let x of a)<br>      for (let y of b)<br>        if (x == y) s.add(x)<br>    return s<br>}</pre>
+<hr>
+
+<script>
+"use strict";
+// Make a large Set
+const url = "https://maeyler.github.io/JS/data/"
+const array = []     // Student objects
+const set = new Set() // distinct names
+function readData(file) {
+    console.log("readData "+file)
+    fetch(url+file)
+        .then(r => r.text())
+        .then(addStudents)
+        .catch(console.error)
+}
+function parseStudent(line) {
+    let [id, name, gpa, ...L] = line.split('\t')
+    let std = new Student(id, name, gpa)
+    std.courses = L; return std
+}
+function addStudents(txt) {
+
+    let a = txt.split('\n')
+    for (let s of a) {
+      let std = parseStudent(s)
+      array.push(std); set.add(std.name)
+    }
+    makeMap();
+    makeArray();
+}
+// make map & timing
+let m=new Map();
+let arr=[];
+function makeArray(){
+  for (let s of array) arr.push(s.id)
+  return arr;
+}
+function makeMap() {
+    for (let s of array) m.set(s.id, s)
+    return m;
+}
+let countmap=0;
+function searchMap() {
+  let sayi=116701734;
+  for (var i = 0; i < 10000; i++) {
+    sayi++;
+    if (m.has(sayi+"")) countmap++;
+  }
+  return countmap
+}
+let countarray=0;
+function searchArray(){
+  let sayi=116701734;
+  for (var i = 0; i < 10000; i++) {
+    sayi++;
+    if (arr.includes(sayi+"")) countarray++;
+  }
+  return countarray
+}
+
+function search(){
+
+}
+
+function timing(f) {
+    let t = performance.now() //more accurate than Date.now()
+    let x = f()
+    t = performance.now() - t
+    let s = f.name+": "+t.toPrecision(3)+" msec " + " bulunan :" + x
+    out.innerHTML += "<br>"+s; console.log(s)
+}
+    //title.innerText = document.title;
+    sample.innerText = searchMap+'\n'+searchArray
+    readData("Students.txt");
+
+</script>
+
+
+
+</body></html>
