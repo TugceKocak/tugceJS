@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" sizes="192x192" href="https://maeyler.github.io/JS/images/JS.png">
+    <title>Make a Table </title>
+
+  <style>
+    body { max-width: 440px; }
+    #sample { overflow-x: auto; }
+    table { border-collapse: collapse; }
+    th { color: blue; padding: 5px 5px; }
+    td {
+        border: 1px solid blue;
+        padding: 5px 5px;
+        text-align: center;
+        position: relative;
+    }
+    td:hover .tip {
+        visibility: visible;
+    }
+    td .tip {
+        visibility: hidden;
+        font-size: small;
+        background-color: blue;
+        color: white;
+        text-align: center;
+        padding: 5px 5px;
+        position: absolute;
+        left: 5px;
+        top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+<center>
+<h2 id="title">Make a Table</h2>
+
+<p>Size:
+<select id="size" oninput="tableFromMenu()">
+    <option selected="">3x5</option>
+    <option>5x5</option>
+    <option>7x8</option>
+    <option>9x9</option>
+</select></p>
+
+<table id="tablo"><tbody><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th></tr><tr><th>1</th><td>1,1<span class="tip">C1</span></td><td>1,2<span class="tip">C2</span></td><td>1,3<span class="tip">C3</span></td><td>1,4<span class="tip">C4</span></td><td>1,5<span class="tip">C5</span></td><td>1,6<span class="tip">C6</span></td><td>1,7<span class="tip">C7</span></td><td>1,8<span class="tip">C8</span></td></tr><tr><th>2</th><td>2,1<span class="tip">C9</span></td><td>2,2<span class="tip">C10</span></td><td>2,3<span class="tip">C11</span></td><td>2,4<span class="tip">C12</span></td><td>2,5<span class="tip">C13</span></td><td>2,6<span class="tip">C14</span></td><td>2,7<span class="tip">C15</span></td><td>2,8<span class="tip">C16</span></td></tr><tr><th>3</th><td>3,1<span class="tip">C17</span></td><td>3,2<span class="tip">C18</span></td><td>3,3<span class="tip">C19</span></td><td>3,4<span class="tip">C20</span></td><td>3,5<span class="tip">C21</span></td><td>3,6<span class="tip">C22</span></td><td>3,7<span class="tip">C23</span></td><td>3,8<span class="tip">C24</span></td></tr><tr><th>4</th><td>4,1<span class="tip">C25</span></td><td>4,2<span class="tip">C26</span></td><td>4,3<span class="tip">C27</span></td><td>4,4<span class="tip">C28</span></td><td>4,5<span class="tip">C29</span></td><td>4,6<span class="tip">C30</span></td><td>4,7<span class="tip">C31</span></td><td>4,8<span class="tip">C32</span></td></tr><tr><th>5</th><td>5,1<span class="tip">C33</span></td><td>5,2<span class="tip">C34</span></td><td>5,3<span class="tip">C35</span></td><td>5,4<span class="tip">C36</span></td><td>5,5<span class="tip">C37</span></td><td>5,6<span class="tip">C38</span></td><td>5,7<span class="tip">C39</span></td><td>5,8<span class="tip">C40</span></td></tr><tr><th>6</th><td>6,1<span class="tip">C41</span></td><td>6,2<span class="tip">C42</span></td><td>6,3<span class="tip">C43</span></td><td>6,4<span class="tip">C44</span></td><td>6,5<span class="tip">C45</span></td><td>6,6<span class="tip">C46</span></td><td>6,7<span class="tip">C47</span></td><td>6,8<span class="tip">C48</span></td></tr><tr><th>7</th><td>7,1<span class="tip">C49</span></td><td>7,2<span class="tip">C50</span></td><td>7,3<span class="tip">C51</span></td><td>7,4<span class="tip">C52</span></td><td>7,5<span class="tip">C53</span></td><td>7,6<span class="tip">C54</span></td><td>7,7<span class="tip">C55</span></td><td>7,8<span class="tip">C56</span></td></tr></tbody></table>
+
+<p id="out" style="font-size:small">2350 chars</p>
+
+<form oninput="tableFromInput()">
+  Rows:
+  <input type="number" id="rows" style="width:40px" value="7">
+  Columns:
+  <input type="number" id="cols" style="width:40px" value="8">
+  <br>
+  <br>
+  <input type="file" onchange="fileSelect(this)">
+  <br>
+</form>
+</center>
+
+<hr>
+<b>Sample code</b>
+<pre id="sample">function makeRows(m, n) {<br>    let row = "&lt;th&gt;&lt;/th&gt;";<br>    for (let j = 1; j &lt;= n; j++) <br>        row += "&lt;th&gt;"+j+"&lt;/th&gt;";<br>    let text = "&lt;tr&gt;"+row+"&lt;/tr&gt;";<br>    for (let i = 1; i &lt;= m; i++) {<br>       row = "&lt;th&gt;"+i+"&lt;/th&gt;";<br>       for (let j = 1; j &lt;= n; j++) {<br>          let p = n*(i-1)+j;<br>          let s = "&lt;span class=tip&gt;C"+p+"&lt;/span&gt;"<br>          row += "&lt;td&gt;"+i+","+j+s+"&lt;/td&gt;";<br>       }<br>       text += "&lt;tr&gt;"+row+"&lt;/tr&gt;";<br>    }<br>    let t = text.length+" chars";<br>    console.log("makeRows: "+m+"x"+n+" "+t);<br>    tablo.innerHTML = text; out.innerText = t; <br>}</pre>
+<hr>
+
+<script>
+"use strict";
+
+let keys;
+function makeRows(m, n) {
+    let row = "<th></th>";
+    for (let j = 0; j < n; j++)
+        row += "<th>"+keys[j]+"</th>";
+    let text = "<tr>"+row+"</tr>";
+    for (let i = 0; i <= m; i++) {
+       row = "<th>"+""+"</th>";
+       row += "<td>"+dosya[i].Name+"</td>";
+       row += "<td>"+dosya[i].Diam+"</td>";
+       row += "<td>"+dosya[i].Mass+"</td>";
+       row += "<td>"+dosya[i].Radius+"</td>";
+       row += "<td>"+dosya[i].Period+"</td>";
+       text += "<tr>"+row+"</tr>";
+    }
+    let t = text.length+" chars";
+    console.log("makeRows: "+m+"x"+n+" "+t);
+    tablo.innerHTML = text; out.innerText = t;
+}
+function tableFromMenu() {
+   let m=txt.split('\n');
+   let n=txt.split('\t')-1;
+
+    makeRows(m, n);
+    rows.value = m;
+    cols.value = n-3;
+}
+function tableFromInput() {
+    let m = rows.value;
+    let n = cols.value-3;
+    makeRows(m, n);
+    size.value = m+"x"+n;
+}
+
+let a ;
+
+const RDR2 = new FileReader();
+RDR2.onload = function() { console.log(RDR2) };
+function fileSelect(t) {
+
+	   a = t.files;
+    if (a.length == 0) return;
+    else if (a.length == 1)   oku(a[0]);
+
+}
+function oku(file){
+console.log("okunuyor")
+
+ let RDR = new FileReader();
+ RDR.onloadend = function() { saveData2(RDR.result) };
+	RDR.readAsText(file);
+
+}
+let txt;
+let dosya;
+async function saveData2(d){
+txt = d
+dosya=toList(txt);
+let m = rows.value;
+let n = cols.value-3;
+makeRows(m, n);
+}
+
+function toList(str) {
+  function toObject(x) {
+    let b = {}
+    for (let [i,s] of x.split('\t').entries())
+      b[keys[i]] = (isNaN(s)? s : Number(s))
+    return b
+    }
+    let [d0, ...data] = str.split('\n')
+    keys = d0.split('\t')
+    console.log("Keys:", keys)
+    return data.map(toObject)
+
+}
+
+    title.innerText = document.title;
+sample.innerText = makeRows.toString();
+    //makeRows(3, 5);
+</script>
+
+
+
+</body></html>
