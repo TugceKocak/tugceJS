@@ -21,3 +21,7 @@ Part2: [temperature conversion](https://tugcekocak.github.io/tugceJS/classwork_p
 
 ### Classwork7
 [Array and Map Comparison](https://tugcekocak.github.io/tugceJS//cw7/CW7.html)
+
+### Classwork7
+[Make Table](https://tugcekocak.github.io/tugceJS//cw8.html)
+
