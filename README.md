@@ -25,3 +25,7 @@ Part2: [temperature conversion](https://tugcekocak.github.io/tugceJS/classwork_p
 ### Classwork8
 [Make Table](https://tugcekocak.github.io/tugceJS//cw8.html)
 
+### Classwork9
+[External API](https://tugcekocak.github.io/tugceJS//CW9.html)
+
+
