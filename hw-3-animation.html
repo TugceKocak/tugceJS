@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Animation</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+          body{
+            background: white;
+          }
+            *{box-sizing: border-box}
+
+            .container{width: 360px;
+                       overflow: hidden;
+                       margin: 50px auto 0 auto;
+                     }
+
+            .container span{width: 100%;
+                            display: block;
+							padding:5px;
+                            text-align: center;
+                            font-family: cursive;
+							    border-radius: 15px;
+                            color: #727272;
+                            font-size: 25px;
+                            background: #f5f7ff;
+                           }
+
+            .container .box{float: left;
+                            width: 100px;
+							margin:10px;
+                            height: 100px;
+							border-radius: 25px;
+                            border: 1px solid #727272;
+                            transition: all .25s ease-in-out;
+                            font-family: sans-serif;
+                            font-size: 85px;
+                            text-align: center;
+                            line-height: 100px;
+                            cursor: pointer;
+                          }
+
+
+
+            button{background: white;
+                   color: #6e6e74;
+                   font-weight: bold;
+                   border: 1px solid #070076;
+                    cursor: pointer;
+                    width: 200px;
+					border-radius: 15px;
+                    height: 40px;
+                    font-size: 22px;
+					border-radius: 15px;
+					font-family:cursive;
+                    display: block;
+                    margin: 10px auto}
+
+            .win{background: #F9690E; color: #fff}
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="container" id="main">
+            <span id="turn">Animation - HW3</span>
+
+            <div class="box" id="box1">A</div>
+            <div class="box" id="box2">B</div>
+            <div class="box" id="box3">C</div>
+            <div class="box" id="box4">D</div>
+            <div class="box" id="box5">E</div>
+            <div class="box" id="box6">F</div>
+            <div class="box" id="box7">G</div>
+            <div class="box" id="box8">H</div>
+            <div class="box" id="box9">I</div>
+        </div>
+
+        <button onclick="animasyon()">Animation</button>
+
+        <script>
+
+
+      function animasyon(){
+        box1.animate(t2,5000)
+        box7.animate(t2,3000)
+        box2.animate(t4,3000)
+        box3.animate(t3,4000)
+        box5.animate(t5,5000)
+        box8.animate(t10,4000)
+        box9.animate(t9,4000)
+        box4.animate(t6,3000)
+        box6.animate(t7,4000)
+        box1.animate(t8,3000)
+        box7.animate(t8,4000)
+      }
+
+            const
+              t1 = { transform: ["translateX(0)", "translateX(-300px)", "translateX(0)", "translateX(300px)","translateX(0)"] },
+              t2 = { transform: ["rotate(0)", "rotate(90deg)", "rotate(180deg)","rotate(270deg)","rotate(360deg)"] },
+              t9 = { transform: ["rotate(270deg)", "rotate(180deg)", "rotate(90deg)","rotate(270deg)","rotate(360deg)"] },
+              t3 = { width: ["200px", "350px", "200px", "0px", "200px"] };
+              t6 = { height: ["250px", "400px", "250px", "0px", "250px"] };
+              t4 = { background: ["#000000","#ffffff", "#000000"] };
+              t7 = { background: ["#7eb654","#68ff0a", "#7eb654"] };
+              t5 = { background: ["#fb0e31","#ab5f6a", "#fb0e31"] };
+              t8 = { background: ["#8154b6","#ddd1eb", "#8154b6"] };
+
+              t10 = { transform: ["scale(1,1)","scale(0.5,0.5)","scale(1,1)"] }
+
+        </script>
+
+
+
+</body></html>
