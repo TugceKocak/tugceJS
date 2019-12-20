@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="https://maeyler.github.io/305/images/icon192.png">
+    <title> HomeWork 2 </title>
+
+  <style>
+    .link {
+        color: blue;
+        cursor: pointer;
+        font-style: italic;
+    }
+    .course {
+        visibility: hidden;
+        font: 10px arial, sans-serif;
+        color: white;
+        background: blue;
+        cursor: text;
+        padding: 6px;
+        position: absolute;
+        height: 90px;
+        overflow-y: auto;
+    }
+    .link:hover .course {
+        visibility: visible;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2 id="title">HomeWork 2</h2>
+
+<button onclick="randomStd()">Random</button>
+<button onclick="findBest()">Best GPA</button>
+<button onclick="out.innerText=&quot;&quot;">Clear</button>
+
+<p>Student id:
+<input type="number" onchange="showStd(value)">
+</p>
+<p>GPA:
+<input type="number" onchange="findGivenGpaNumber(value)">
+</p>
+<p>Exam Room:
+<input type="text" onchange="getCourse(value)">
+</p>
+<p>Find courses at date:
+<input type="text" onchange="findSameDateCourse(value)" >
+</p>
+<p>Course code:
+<input type="text" onchange="studentsIn(value)" value="math 206 ">
+</p>
+<p id="out" onclick="doClick(event)">Result:<br>189314 chars, 3129 lines, 3129 students </p>
+
+<hr>
+<b>Sample code</b>
+<pre id="sample">function readData(file) {<br>    console.log("readData "+file);<br>    fetch(url+file)<br>        .then(r =&gt; r.text(), report)<br>        .then(addStudents, report);<br>}<br>function addStudents(txt) {<br>    let msg = txt.length+" chars, ";<br>    let a = txt.split("\n");<br>    msg += a.length+" lines, ";<br>    for (let s of a) {<br>      let std = parseStudent(s);<br>      keys.push(std.id); vals.push(std);<br>    }<br>    report(msg + keys.length+" students");<br>}</pre>
+<hr>
+
+<script>
+"use strict";
+function report(msg, id, list) {
+    out.innerHTML += "<br>"; msg += " ";
+    out.appendChild(document.createTextNode(msg));
+    let n1;
+    if (id) {
+        n1 = document.createElement("span");
+        n1.appendChild(document.createTextNode(id));
+        n1.classList.add("link");
+        out.appendChild(n1); msg += id;
+        //n1.addEventListener("click", doClick);
+    }
+    if (list) {
+        let n2 = document.createElement("span");
+        n2.appendChild(document.createTextNode(""));
+        n2.innerHTML += list.join("<br>");
+        n2.classList.add("course");
+        if (n1) n1.appendChild(n2);
+    }
+    console.log(msg);
+}
+const url = "https://maeyler.github.io/JS/data/";
+function readData(file) {
+    console.log("readData "+file);
+    fetch(url+file)
+        .then(r => r.text(), report)
+        .then(addStudents, report);
+}
+function readDatac(file){
+  fetch(url+file)
+      .then(r => r.text(), report)
+      .then(addCourses, report);
+}
+function addCourses(txt){
+  let msg = txt.length+" chars, ";
+  let a = txt.split("\n");
+  msg += a.length+" lines, ";
+  for (let s of a) {
+    let crs = parseCourse(s);
+    keysc.push(crs.clas); valsc.push(crs);
+  }
+}
+function parseCourse(line){
+  let [clas, time, date, ...listc] = line.split("\t");
+  return {clas, time, date, listc};
+}
+function parseStudent(line) {
+    let [id, name, gpa, ...list] = line.split("\t");
+    return {id, name, gpa, list};
+}
+function addStudents(txt) {
+    let msg = txt.length+" chars, ";
+    let a = txt.split("\n");
+    msg += a.length+" lines, ";
+    for (let s of a) {
+      let std = parseStudent(s);
+      keys.push(std.id); vals.push(std);
+    }
+
+}
+function doClick(evt) {
+    //console.log(evt);
+    let t = evt.target;
+    let s = t.innerText;
+    if (/^\d+$/.test(s)) showStd(s); //s contains digits
+    else if (t = t.firstElementChild) {
+        t.style.visibility = "";
+        let hide = function () {
+            t.style.visibility = "hidden";
+        };
+        setTimeout(hide, 5000);
+    }
+}
+function findID(id) {
+    let i = keys.indexOf(id);
+    if (i < 0) return null;
+    return vals[i];
+}
+function showStd(id) {
+    let t = id+" ";
+    let std = findID(id);
+    if (!std) {
+        report(t+"not found"); return;
+    }
+    t += std.name+" "+std.gpa;
+    report(t, std.list.length+" courses taken: ");
+    for (var i = 0; i < std.list.length; i++) {
+      report(std.list[i]);
+    }
+}
+function studentsIn(code) {
+    code = code.toUpperCase();
+    let a = [];
+    for (let std of vals)
+        if (std.list.includes(code))
+            a.push(std.id+" "+std.name);
+    if (a.length > 0)
+        report(code+": ", a.length+" students", a);
+    else report("No students in "+code);
+}
+function randomStd() {
+    let i = Math.trunc(keys.length * Math.random());
+    let b = vals[i];
+    report("Random: "+b.name, b.id);
+}
+function findGivenGpaNumber(gGpa){
+  let count=0;
+  for (let std of vals)
+      if (std.gpa>gGpa) count++;
+  report("Number of students with a given gpa: "+gGpa+" / "+count);
+}
+function getCourse(groom){
+  groom = groom.toUpperCase();
+  let a = [];
+  for (let crs of valsc)
+      if (crs.listc.includes(groom))
+          a.push(crs.clas);
+  if (a.length > 0)
+      report(groom+": ", a.length+" courses", a);
+  else report("No courses in "+groom);
+}
+function findSameDateCourse(gdate){
+  for (let crs of valsc)
+      if (crs.date==gdate) report(crs.clas);
+
+}
+function findBest() {
+    let b = vals[0];
+    for (let std of vals)
+        if (std.gpa > b.gpa) b = std;
+    report("Best: "+b.name, b.id);
+}
+    title.innerText = document.title;
+    sample.innerText = readData+"\n"+addStudents;
+    const keys = [], vals = [];
+    const keysc= [], valsc=[];
+    readData("Students.txt")
+    readDatac("Courses.txt")
+</script>
+
+
+
+</body></html>
