@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width">
+
+    <title>Poisson Table </title>
+
+  <style>
+    body { max-width: 330px; }
+    #sample { overflow-x: auto; }
+    table { border-collapse: collapse; }
+    th { color: purple; padding: 5px 5px; }
+    td { 
+        border: 1px solid green; 
+        padding: 5px 5px; 
+        text-align: center; 
+        position: relative;
+    }
+    td:hover .tip {
+        visibility: visible;
+    }
+    td .tip {
+        visibility: hidden;
+        font-size: small;
+        background-color: yellow;
+        color: black;
+        text-align: center;
+        padding: 5px 5px;
+        position: absolute;
+        left: 5px; 
+        top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+<center>
+<h2 id=title></h2>
+
+<p>Size: 
+<select id="size" oninput="tableFromMenu()">
+    <option selected>1x6</option>
+    <option>2x6</option>
+    <option>3x6</option>
+	<option>4x6</option>
+    <option>5x6</option>
+    <option>6x6</option>
+	<option>7x6</option>
+    <option>8x6</option>
+    <option>9x6</option>
+</select></p>
+
+<table id="tablo"></table>
+
+<p id=out style="font-size:small"></p>
+
+<form oninput="tableFromInput()">
+  Rows: 
+  <input type=number id=tableRow min="1" style="width:55px" value=1>
+  Columns: 
+  <input type=number id=tableColumn min="1" max="6" style="width:55px" value=6>
+  <br><br>
+ 
+</form>
+
+
+<br>
+<h3 id=title2> Sample code </h3>
+</center>
+
+<h4 id=formula> </h4>
+
+
+<script>
+function makeRows(m, n) {
+	const L = [0.5, 1, 1.5, 2, 2.5, 3]
+	let p=[]; for (let λ of L) p.push(Math.exp(-λ))
+    let row = "<th></th>";
+    for (let j = 0.5; j <= 3; j+=0.5) 
+        row += "<th>"+"λ="+j+"</th>";
+    let text = "<tr>"+row+"</tr>";
+
+    row = "<th>"+"x="+0+"</th>";
+    for (let j = 0; j < n; j++) {
+         let s=p[j];
+         s=s.toFixed(4);
+          p[j]=s;
+          row += "<td>"+p[j]+"</td>";
+       }
+       text += "<tr>"+row+"</tr>";
+
+    for (let i = 1; i < m; i++) {
+       row = "<th>"+"x="+i+"</th>";
+       for (let j = 0; j < n; j++) {
+          let s=(p[j]*L[j])/i;
+          s=s.toFixed(4);
+          p[j]=s;
+          row += "<td>"+s+"</td>";
+       }
+       text += "<tr>"+row+"</tr>";
+    }
+    let t = "";
+    console.log("makeRows: "+m+"x"+n+" "+t);
+    tablo.innerHTML = text; out.innerText = t; 
+}
+function tableFromMenu() {
+    let [m, n] = size.value.split("x");
+    makeRows(m, n);
+    tableRow.value = m;
+    tableColumn.value = n;
+}
+function tableFromInput() {
+    let m = tableRow.value;
+    let n = tableColumn.value;
+    makeRows(m, n);
+    size.value = m+"x"+n;
+}
+function resetOperation(){
+	window.location.reload();
+
+}
+    title.innerText = document.title;
+    formula.innerText=makeRows.toString();
+    makeRows(0, 6);
+</script>
+
+</body>
+</html> 
