@@ -1,8 +1,8 @@
 {
     "name": "Tugce Kocak",
     "description": "Advanced Programming Classwork",
-    "short_name": "JS",
-    "start_url": "/JS/index.html",
+    "short_name": "tugceJS",
+    "start_url": "/tugceJS/index.html",
     "display": "standalone",
     "background_color": "white",
     "theme_color": "#457cdb",
